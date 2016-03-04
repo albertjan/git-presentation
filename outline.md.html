@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>git's not a mystery</title>
+		<style>
+			/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+sup {
+   vertical-align: super;
+   font-size: smaller;
+}
+
+sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+/* Generic styles */
+body {
+	background: #f5f5f5;
+  color: #222;
+  font-family: 'Palatino Linotype','Book Antiqua',Palatino,FreeSerif,serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6,
+ul, ol,
+p,
+code, pre,
+hr {
+	line-height: 1.5em;
+	margin: 1.5em 0 0.5em 0;
+}
+
+*:first-child {
+	margin-top: 0;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+}
+
+h1 {
+	font-size: 3.5em;
+}
+
+h2 {
+	font-size: 2.5em;
+}
+
+h3 {
+	font-size: 2em;
+}
+
+h4 {
+	font-size: 1.5em
+}
+
+h5 {
+	font-size: 1.2em;
+}
+
+h6 {
+	font-size: 1em;
+}
+
+/* Lists */
+ul, ol {
+	padding-left: 2em;
+}
+
+ul {
+	list-style-type: disc;	
+}
+
+ol {
+	list-style-type: decimal;
+}
+
+/* Code and pre */
+code, pre {
+	font-family: "Bitstream Vera Sans Mono", "Courier", monospace;
+}
+code {
+	background: none repeat scroll 0 0 #F8F8FF;
+  border: 1px solid #DEDEDE;
+  border-radius: 3px 	;
+  padding: 0 0.2em;
+}
+pre {
+	border-left: 5px solid #eee;
+	margin-left: 2em;	
+	padding-left: 1em;
+}
+pre > code {
+	background: transparent;
+	border: none;
+	padding: 0;
+}
+
+/* Links */
+a {
+  color: #261A3B;
+}
+
+a:visited {
+  color: #261A3B;
+}
+
+/* Inlines */
+strong {
+	font-weight: bold;
+}
+
+em {
+	font-style: italic;
+}
+
+/* Container */
+.container {
+	background: #FFF;
+	padding: 30px 50px;
+	margin: 0 auto;
+	width: 850px;
+}
+
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1 id="git-s-not-a-mystery">git&#39;s not a mystery</h1>
+<ol>
+<li>Basics from the command line</li>
+<li>Getting yourself out of a hole</li>
+<li>Committing like a pro</li>
+<li>Keeping the history clean - Merging vs. Rebasing</li>
+<li>Cherry picking</li>
+</ol>
+<h2 id="basics-from-the-command-line">Basics from the command line</h2>
+<p>Cloning:</p>
+<pre><code class="lang-sh">git clone https://albert-jan.nijburg@stash.centrastage.com:8443/scm/agent/centrastage.git
+</code></pre>
+<p>Creating a branch:</p>
+<pre><code class="lang-sh">git branch -b &#39;name-of-branch&#39;
+</code></pre>
+<p>Pushing a branch to a remote:</p>
+<pre><code class="lang-sh">git push -u origin name-of-branch
+</code></pre>
+<p>Commit and add all changed files (use with caution):</p>
+<pre><code class="lang-sh">git commit -am &#39;commit message&#39;
+</code></pre>
+<p>Update the current branch from the tracking remote branch:</p>
+<pre><code class="lang-sh">git pull
+</code></pre>
+<p>Update the local repository with everything from the remote but don&#39;t change your local branches:</p>
+<pre><code class="lang-sh">git fetch
+</code></pre>
+<p>Update the local branch after a fetch:</p>
+<pre><code class="lang-sh">git merge origin/name-of-branch
+</code></pre>
+<p>Get a list of commit messages: (where n is the number of messages you want to
+see.)</p>
+<pre><code class="lang-sh">git log -n
+</code></pre>
+<h2 id="getting-yourself-out-of-a-hole">Getting yourself out of a hole</h2>
+<p>You&#39;ve screwed up your repository or branch and you want to undo go back or
+revert or reset.</p>
+<p>Un-stage files:</p>
+<pre><code class="lang-sh">git reset path/to/file
+</code></pre>
+<p>Or if you want to reset everything:</p>
+<pre><code class="lang-sh">git reset
+</code></pre>
+<p>Accidentally removed a file or changed it, but you haven&#39;t commited it:</p>
+<pre><code class="lang-sh">git checkout HEAD -- path/to/file
+</code></pre>
+<p>If you have commited it and you don&#39;t want to revert the entire commit:</p>
+<pre><code class="lang-sh">git checkout HEAD^ -- path/to/file
+</code></pre>
+<p>Throw away everything you changed after the last commit:</p>
+<pre><code class="lang-sh">git reset --hard
+</code></pre>
+<p>Did a bad merge and want to go back to the state of a branch on the remote.</p>
+<pre><code class="lang-sh">git reset --hard origin/branch-name
+</code></pre>
+<p>Halfway through a rebase but not feeling it:</p>
+<pre><code class="lang-sh">git rebase --abort
+</code></pre>
+<h2 id="commiting-code-like-a-pro">Commiting code like a pro</h2>
+<p>Make sure only changes that belong together are commited together:</p>
+<pre><code class="lang-sh">git add -p
+</code></pre>
+<p>for that. It will present you with a change called a chunk and lets you choose
+whether or not you want that to be staged.</p>
+<p>For example there&#39;s a bug you fixed and you&#39;ve written a unittest and the code
+that fixes it. You will want to commit the unittest seperately from the code
+that fixes it. (red-green-refactor and all). You can easily add that to
+different commits.</p>
+<p>Sizeable chucks can be split too. And you can edit the patch for a chunk if you
+want to commit one line of a two line chunk.</p>
+<p>Lets say you&#39;re working on a bigish feature, and you have 15 commits, in your
+branch. I&#39;ll bet you some of them will have a message like &quot;and this too&quot; or
+&quot;forgot about this file.&quot;. Those are <em>not</em> useful to the reviewer. Here where
+interactive rebase comes in.</p>
+<h3 id="interactive-rebase">Interactive rebase</h3>
+<p>Interactive rebase, means you&#39;re going to be rewriting history. This works best
+if you don&#39;t have merge commits. (read next chapter) With interactive rebase you
+can reorder, squish/fixup, edit, reword. So it&#39;s like the swiss army knife for
+your PR.</p>
+<p>We&#39;re going to rebase the last 11 commits:</p>
+<pre><code class="lang-sh">git rebase -i HEAD~11
+</code></pre>
+<p>This will open up your editor with a file that looks something like:</p>
+<pre><code>pick f7f3f6d changed my name a bit
+pick 310154e updated README formatting and added blame
+pick a5f4a0d added cat-file
+pick ac9dee7 misc bugfixes
+pick 204cb44 code additions/edits
+pick 719d389 more code
+pick f0f9b91 here have more code
+pick 76b33dc aaaaaaaaa
+pick 0822c0d adkjslkdfjsdklfj
+pick 737477f my hands are typing words
+pick 8263815 haaaaaaaands
+
+# Rebase 710f0f8..8263815 onto 710f0f8
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  e, edit = use commit, but stop for amending
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like &quot;squash&quot;, but discard this commit&#39;s log message
+#  x, exec = run command (the rest of the line) using shell
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+</code></pre><p>This gives you the opportunity to group and squash the commits so they are
+grouped per change. After you save and close this file it will open a new file
+for every commit you&#39;ve squashed and reworded. Make sure you don&#39;t throw away
+information from commit messages (do throw away when it&#39;s useless).</p>
+<h2 id="keeping-the-history-clean">Keeping the history clean</h2>
+<p>If you consider it your responsibility to get a PR merged into the branch. You
+should care about the commits in it. Having a merge commit in there or commits
+that are already in the branch that you want it to get merged into will not help
+.</p>
+<p>So when there are conflicts with the merge into the upstream branch, do a rebase.
+A rebase rewinds your commits pull the commits from the upstream branch and then
+replays your commits after them, letting you resolve any conflicts on a per
+commit basis.</p>
+<p>This nicely hooks into what I described before: Group all changes together in a
+commit.</p>
+<p>Rebasing basically rewinds the branch to the last time the two branches were the
+same. Then it adds the changes from the remote, and replays your commits after
+it. It will force you to resolve conflicts for every commit, this is probably
+the biggest drawback, and one of the reasons you might want to do a merge
+instead.</p>
+<p>To illustrate how the repository looks before and after a merge and a rebase:</p>
+<h4 id="you-ve-done-some-commits-and-there-are-some-commits-on-the-remote-">You&#39;ve done some commits and there are some commits on the remote.</h4>
+<p><img src="./branched.png" alt="branched"></p>
+<h4 id="when-you-merge-upstream-back-into-your-branch-">When you merge upstream back into your branch:</h4>
+<p><img src="./merged.png" alt="merged"></p>
+<h4 id="when-you-rebase-instead-of-merge-">When you rebase instead of merge:</h4>
+<p><img src="./rebased.png" alt="rebased"></p>
+<p>You should remember that this will be the state of your PR, so another merge will be added when the PR is merged.</p>
+
+		</div>
+
+		<script></script>
+	</body>
+</html>
