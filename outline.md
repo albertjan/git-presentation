@@ -96,7 +96,7 @@ Make sure only changes that belong together are commited together:
 git add -p
 ```
 
-for that. It will present you with a change called a chunk and lets you choose
+It will present you with a change called a chunk and lets you choose
 whether or not you want that to be staged.
 
 For example there's a bug you fixed and you've written a unittest and the code
@@ -198,3 +198,6 @@ To illustrate how the repository looks before and after a merge and a rebase:
 ![rebased](./rebased.png)
 
 You should remember that this will be the state of your PR, so another merge will be added when the PR is merged.
+
+
+Bye bye.
